@@ -1,6 +1,8 @@
 package ru.vsu.cs.sazonov.faculty.app.contoller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,15 +26,15 @@ public class PartyController implements PartyApi {
     private final PartyService partyService;
 
     @Override
-    public ResponseEntity<List<StudentDto>> getStudents(Integer partyId) {
-        List<Student> students = partyService.getStudents(partyId);
+    public ResponseEntity<List<StudentDto>> getStudents(Integer partyId, String sortParam) {
+        List<Student> students = partyService.getStudents(partyId, Sort.by(Sort.Direction.ASC, sortParam));
         List<StudentDto> studentDtos = StudentMapper.INSTANCE.toDto(students);
         return ResponseEntity.ok(studentDtos);
     }
 
     @Override
-    public ResponseEntity<List<PartyDto>> getAllParty() {
-        List<Party> parties = partyService.getAllParty();
+    public ResponseEntity<List<PartyDto>> getAllParty(int page, int size) {
+        List<Party> parties = partyService.getAllParty(PageRequest.of(page,size));
         List<PartyDto> partyDtos = PartyMapper.INSTANCE.toDto(parties);
         return ResponseEntity.ok(partyDtos);
     }

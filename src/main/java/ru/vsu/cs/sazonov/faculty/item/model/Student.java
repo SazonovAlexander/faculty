@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Generated;
 
 import java.util.List;
@@ -28,6 +29,9 @@ public class Student {
     private String email;
     private String address;
 
+    @Formula("(SELECT COALESCE(AVG(se.grade), 0) FROM student_exam se WHERE se.student_id = id)")
+    private Double avg;
+
     @ManyToOne()
     private Party party;
 
@@ -36,6 +40,7 @@ public class Student {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<StudentExam> studentExams;
+
 
 
 }

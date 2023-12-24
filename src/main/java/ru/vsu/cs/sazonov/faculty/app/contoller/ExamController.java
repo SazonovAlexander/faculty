@@ -1,6 +1,7 @@
 package ru.vsu.cs.sazonov.faculty.app.contoller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class ExamController implements ExamApi {
     private final ExamService examService;
 
     @Override
-    public ResponseEntity<List<ExamDto>> getAllExam() {
-        List<Exam> exam = examService.getAllExam();
+    public ResponseEntity<List<ExamDto>> getAllExam(int page, int size) {
+        List<Exam> exam = examService.getAllExam(PageRequest.of(page, size));
         List<ExamDto> examDtos = ExamMapper.INSTANCE.toDto(exam);
         return ResponseEntity.ok(examDtos);
     }

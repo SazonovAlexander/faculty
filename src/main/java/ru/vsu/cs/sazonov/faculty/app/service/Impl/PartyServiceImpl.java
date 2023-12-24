@@ -1,6 +1,8 @@
 package ru.vsu.cs.sazonov.faculty.app.service.Impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sazonov.faculty.app.exception.NotFoundException;
 import ru.vsu.cs.sazonov.faculty.app.service.PartyService;
@@ -10,7 +12,6 @@ import ru.vsu.cs.sazonov.faculty.item.model.Party;
 import ru.vsu.cs.sazonov.faculty.item.model.Student;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -21,14 +22,14 @@ public class PartyServiceImpl implements PartyService {
 
 
     @Override
-    public List<Student> getStudents(Integer partyId) {
+    public List<Student> getStudents(Integer partyId, Sort by) {
         Party party = partyRepository.findById(partyId).orElseThrow(() -> new NotFoundException("Book with this id not found"));
-        return studentRepository.findAllByParty(party);
+        return studentRepository.findAllByParty(party, by);
     }
 
     @Override
-    public List<Party> getAllParty() {
-        return partyRepository.findAll();
+    public List<Party> getAllParty(PageRequest pageRequest) {
+        return partyRepository.findAll(pageRequest).getContent();
     }
 
     @Override

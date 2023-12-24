@@ -1,13 +1,13 @@
 package ru.vsu.cs.sazonov.faculty.app.service;
 
-import ru.vsu.cs.sazonov.faculty.item.model.Party;
+import org.springframework.data.domain.PageRequest;
 import ru.vsu.cs.sazonov.faculty.item.model.Teacher;
 
 import java.util.List;
 
 public interface TeacherService {
 
-    List<Teacher> getAllTeacher();
+    List<Teacher> getAllTeacher(PageRequest pageRequest);
 
     Teacher getTeacher(Integer teacherId);
 

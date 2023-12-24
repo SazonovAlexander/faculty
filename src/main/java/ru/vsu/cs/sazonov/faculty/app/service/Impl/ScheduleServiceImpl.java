@@ -1,6 +1,7 @@
 package ru.vsu.cs.sazonov.faculty.app.service.Impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sazonov.faculty.app.exception.NotFoundException;
 import ru.vsu.cs.sazonov.faculty.app.service.DictionaryService;
@@ -32,8 +33,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> getAllSchedule() {
-        return scheduleRepository.findAll();
+    public List<Schedule> getAllSchedule(PageRequest pageRequest) {
+        return scheduleRepository.findAll(pageRequest).getContent();
     }
 
     @Override

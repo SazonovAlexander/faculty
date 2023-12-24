@@ -10,7 +10,19 @@ import java.util.List;
 public interface StudentApi {
 
     @GetMapping("/student")
-    ResponseEntity<List<StudentDto>> getAllStudent();
+    ResponseEntity<List<StudentDto>> getAllStudent(
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size,
+        @RequestParam(required = false, defaultValue = "id") String sortParam
+
+    );
+
+    @GetMapping("/student/find")
+    ResponseEntity<List<StudentDto>> getStudentsWithFilter(
+            @RequestParam(required = false) String fullName,
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/student/{studentId}")
     ResponseEntity<StudentDto> getStudent(

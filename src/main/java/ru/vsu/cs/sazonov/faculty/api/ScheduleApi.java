@@ -10,7 +10,10 @@ import java.util.List;
 public interface ScheduleApi {
 
     @GetMapping("schedule")
-    ResponseEntity<List<ScheduleDto>> getAllSchedule();
+    ResponseEntity<List<ScheduleDto>> getAllSchedule(
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("schedule/classroom/{classroomId}")
     ResponseEntity<List<ScheduleDto>> getScheduleOfClassroom(

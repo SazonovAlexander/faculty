@@ -1,6 +1,7 @@
 package ru.vsu.cs.sazonov.faculty.app.service.Impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sazonov.faculty.app.exception.NotFoundException;
 import ru.vsu.cs.sazonov.faculty.app.service.TeacherService;
@@ -15,8 +16,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
     @Override
-    public List<Teacher> getAllTeacher() {
-        return teacherRepository.findAll();
+    public List<Teacher> getAllTeacher(PageRequest pageRequest) {
+        return teacherRepository.findAll(pageRequest).getContent();
     }
 
     @Override

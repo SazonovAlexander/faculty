@@ -17,4 +17,5 @@ public class StudentDto {
     private String email;
     private String address;
     private PartyDto party;
+    private Double avg;
 }

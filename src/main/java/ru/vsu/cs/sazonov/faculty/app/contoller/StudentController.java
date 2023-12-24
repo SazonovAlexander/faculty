@@ -1,6 +1,8 @@
 package ru.vsu.cs.sazonov.faculty.app.contoller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,10 +23,16 @@ public class StudentController implements StudentApi {
 
     private final StudentService studentService;
     @Override
-    public ResponseEntity<List<StudentDto>> getAllStudent() {
-        List<Student> allStudent = studentService.getAllStudent();
+    public ResponseEntity<List<StudentDto>> getAllStudent(int page, int size, String sortParam) {
+        List<Student> allStudent = studentService.getAllStudent(PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortParam)));
         List<StudentDto> dto = StudentMapper.INSTANCE.toDto(allStudent);
         return ResponseEntity.ok(dto);
+    }
+
+    @Override
+    public ResponseEntity<List<StudentDto>> getStudentsWithFilter(String fullName, int page, int size) {
+        List<Student> students = studentService.getAllStudent(fullName, PageRequest.of(page, size));
+        return ResponseEntity.ok(StudentMapper.INSTANCE.toDto(students));
     }
 
     @Override

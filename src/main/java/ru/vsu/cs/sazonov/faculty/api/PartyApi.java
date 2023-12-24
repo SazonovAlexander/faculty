@@ -15,12 +15,17 @@ public interface PartyApi {
     @GetMapping("/students/{partyId}")
     ResponseEntity<List<StudentDto>> getStudents(
             @PathVariable("partyId")
-            Integer partyId
+            Integer partyId,
+            @RequestParam(required = false, defaultValue = "avg") String sortParam
+
     );
 
 
     @GetMapping("/party")
-    ResponseEntity<List<PartyDto>> getAllParty();
+    ResponseEntity<List<PartyDto>> getAllParty(
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/party/{partyId}")
     ResponseEntity<PartyDto> getParty(

@@ -1,12 +1,13 @@
 package ru.vsu.cs.sazonov.faculty.app.service;
 
+import org.springframework.data.domain.PageRequest;
 import ru.vsu.cs.sazonov.faculty.item.model.Exam;
 
 import java.util.List;
 
 public interface ExamService {
 
-    List<Exam> getAllExam();
+    List<Exam> getAllExam(PageRequest pageRequest);
 
     Exam getExam(Integer examId);
 

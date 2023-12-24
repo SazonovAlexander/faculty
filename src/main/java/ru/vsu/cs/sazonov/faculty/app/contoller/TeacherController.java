@@ -1,6 +1,7 @@
 package ru.vsu.cs.sazonov.faculty.app.contoller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class TeacherController implements TeacherApi {
 
     private final TeacherService teacherService;
     @Override
-    public ResponseEntity<List<TeacherDto>> getAllTeacher() {
-        List<Teacher> teachers = teacherService.getAllTeacher();
+    public ResponseEntity<List<TeacherDto>> getAllTeacher(int page, int size) {
+        List<Teacher> teachers = teacherService.getAllTeacher(PageRequest.of(page, size));
         List<TeacherDto> teacherDtos = TeacherMapper.INSTANCE.toDto(teachers);
         return ResponseEntity.ok(teacherDtos);
     }

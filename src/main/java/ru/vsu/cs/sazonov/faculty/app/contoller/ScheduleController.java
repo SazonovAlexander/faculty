@@ -1,6 +1,7 @@
 package ru.vsu.cs.sazonov.faculty.app.contoller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,8 @@ public class ScheduleController implements ScheduleApi {
     private final ru.vsu.cs.sazonov.faculty.app.mapper.test.ScheduleMapper scheduleMapper;
 
     @Override
-    public ResponseEntity<List<ScheduleDto>> getAllSchedule() {
-        List<Schedule> allSchedule = scheduleService.getAllSchedule();
+    public ResponseEntity<List<ScheduleDto>> getAllSchedule(int page, int size) {
+        List<Schedule> allSchedule = scheduleService.getAllSchedule(PageRequest.of(page, size));
         List<ScheduleDto> dto = scheduleMapper.mapScheduleToDto(allSchedule);
         return ResponseEntity.ok(dto);
     }

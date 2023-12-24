@@ -1,6 +1,7 @@
 package ru.vsu.cs.sazonov.faculty.app.service.Impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.vsu.cs.sazonov.faculty.app.exception.NotFoundException;
 import ru.vsu.cs.sazonov.faculty.app.service.ExamService;
@@ -17,8 +18,8 @@ public class ExamServiceImpl implements ExamService {
 
 
     @Override
-    public List<Exam> getAllExam() {
-        return examRepository.findAll();
+    public List<Exam> getAllExam(PageRequest pageRequest) {
+        return examRepository.findAll(pageRequest).getContent();
     }
 
     @Override

@@ -10,7 +10,10 @@ import java.util.List;
 public interface TeacherApi {
 
     @GetMapping("/teacher")
-    ResponseEntity<List<TeacherDto>> getAllTeacher();
+    ResponseEntity<List<TeacherDto>> getAllTeacher(
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/teacher/{teacherId}")
     ResponseEntity<TeacherDto> getTeacher(

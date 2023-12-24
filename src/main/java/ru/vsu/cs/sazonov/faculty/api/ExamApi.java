@@ -9,7 +9,10 @@ import java.util.List;
 public interface ExamApi {
 
     @GetMapping("/exam")
-    ResponseEntity<List<ExamDto>> getAllExam();
+    ResponseEntity<List<ExamDto>> getAllExam(
+        @RequestParam(required = false, defaultValue = "0") int page,
+        @RequestParam(required = false, defaultValue = "10") int size
+    );
 
     @GetMapping("/exam/{examId}")
     ResponseEntity<ExamDto> getExam(
