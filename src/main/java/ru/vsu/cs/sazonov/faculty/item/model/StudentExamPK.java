@@ -18,14 +18,14 @@ import java.io.Serializable;
 @Data
 public class StudentExamPK implements Serializable {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "student_id")
-    @JsonIgnore
+
     private Student student;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "exam_id")
-    @JsonIgnore
+
     private Exam exam;
 
 

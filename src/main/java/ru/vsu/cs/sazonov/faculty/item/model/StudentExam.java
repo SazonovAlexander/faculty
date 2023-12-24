@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 public class StudentExam {
 
     @EmbeddedId
-    @JsonIgnore
     private StudentExamPK pk;
     private int grade;
 

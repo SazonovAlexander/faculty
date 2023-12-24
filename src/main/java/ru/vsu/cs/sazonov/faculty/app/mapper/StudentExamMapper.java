@@ -15,4 +15,6 @@ public interface StudentExamMapper {
     StudentExamDto toDto(StudentExam item);
 
     List<StudentExamDto> toDto(List<StudentExam> items);
+
+    StudentExam mapToItem(StudentExamDto dto);
 }

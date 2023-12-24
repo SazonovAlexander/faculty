@@ -23,15 +23,16 @@ public class Exam {
     private Integer id;
     private String date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private Party party;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private Course course;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private Classroom classroom;
 
+    @Transient
     @OneToMany(mappedBy = "pk.exam",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)

@@ -24,6 +24,7 @@ public class Classroom {
     private int floor;
     private int number;
 
+    @Transient
     @OneToMany(mappedBy = "classroom")
     private List<Exam> exams;
 
@@ -31,4 +32,13 @@ public class Classroom {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Schedule> schedules;
+
+    @Override
+    public String toString() {
+        return "Classroom{" +
+                "id=" + id +
+                ", floor=" + floor +
+                ", number=" + number +
+                '}';
+    }
 }

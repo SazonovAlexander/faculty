@@ -13,12 +13,8 @@ import ru.vsu.cs.sazonov.faculty.item.model.Teacher;
 @Builder
 public class ScheduleDto {
 
-    private PartyDto party;
-    private CourseDto course;
-    private ClassroomDto classroom;
-    private TeacherDto teacher;
+    private SchedulePKDto pk;
     private String day;
     private String time;
-
 
 }

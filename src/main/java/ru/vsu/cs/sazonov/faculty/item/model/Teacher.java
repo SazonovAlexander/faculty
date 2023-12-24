@@ -33,4 +33,14 @@ public class Teacher {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Schedule> schedules;
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", degree='" + degree + '\'' +
+                '}';
+    }
 }

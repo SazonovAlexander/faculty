@@ -15,4 +15,6 @@ public interface ScheduleMapper {
     ScheduleDto toDto(Schedule item);
 
     List<ScheduleDto> toDto(List<Schedule> items);
+
+    Schedule mapToItem(ScheduleDto scheduleDto);
 }

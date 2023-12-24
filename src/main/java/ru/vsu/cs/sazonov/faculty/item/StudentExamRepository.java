@@ -13,6 +13,6 @@ import java.util.List;
 public interface StudentExamRepository extends JpaRepository<StudentExam, StudentExamPK> {
 
     List<StudentExam> findByPkStudent (Student student);
-    //List<StudentExam> findByExam (Exam exam);
+    List<StudentExam> findByPkExam (Exam exam);
 
 }

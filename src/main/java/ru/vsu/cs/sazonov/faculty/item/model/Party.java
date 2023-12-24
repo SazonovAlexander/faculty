@@ -23,10 +23,12 @@ public class Party {
     private int number;
     private int year;
 
+    @Transient
     @OneToMany(mappedBy = "party")
     private List<Exam> exams;
 
-    @OneToMany(mappedBy = "party", fetch = FetchType.LAZY)
+    @Transient
+    @OneToMany(mappedBy = "party")
     private List<Student> students;
 
     @OneToMany(mappedBy = "pk.party",
@@ -34,5 +36,12 @@ public class Party {
             cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
-
+    @Override
+    public String toString() {
+        return "Party{" +
+                "id=" + id +
+                ", number=" + number +
+                ", year=" + year +
+                '}';
+    }
 }

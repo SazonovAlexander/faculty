@@ -11,4 +11,8 @@ public interface DictionaryService {
 
     List<Classroom> getAllClassroom();
 
+    Classroom getClassroom(Integer classroomId);
+
+    Course getCourse(Integer courseId);
+
 }

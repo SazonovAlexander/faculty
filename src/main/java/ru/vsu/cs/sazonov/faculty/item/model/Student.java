@@ -28,9 +28,10 @@ public class Student {
     private String email;
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     private Party party;
 
+    @Transient
     @OneToMany(mappedBy = "pk.student",
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)

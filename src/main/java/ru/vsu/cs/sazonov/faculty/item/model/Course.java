@@ -20,6 +20,7 @@ public class Course {
     private Integer id;
     private String name;
 
+    @Transient
     @OneToMany(mappedBy = "course")
     private List<Exam> exams;
 
@@ -27,4 +28,12 @@ public class Course {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Schedule> schedules;
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
