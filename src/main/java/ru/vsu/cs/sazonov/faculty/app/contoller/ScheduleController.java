@@ -20,11 +20,12 @@ import java.util.List;
 public class ScheduleController implements ScheduleApi {
 
     private final ScheduleService scheduleService;
+    private final ru.vsu.cs.sazonov.faculty.app.mapper.test.ScheduleMapper scheduleMapper;
 
     @Override
     public ResponseEntity<List<ScheduleDto>> getAllSchedule() {
         List<Schedule> allSchedule = scheduleService.getAllSchedule();
-        List<ScheduleDto> dto = ScheduleMapper.INSTANCE.toDto(allSchedule);
+        List<ScheduleDto> dto = scheduleMapper.mapScheduleToDto(allSchedule);
         return ResponseEntity.ok(dto);
     }
 
@@ -58,7 +59,7 @@ public class ScheduleController implements ScheduleApi {
 
     @Override
     public ResponseEntity<ScheduleDto> createSchedule(ScheduleDto schedule) {
-        Schedule scheduleItem = ScheduleMapper.INSTANCE.mapToItem(schedule);
+        Schedule scheduleItem = scheduleMapper.mapDtoToSchedule(schedule);
         Schedule createdSchedule = scheduleService.createSchedule(scheduleItem);
         ScheduleDto dto = ScheduleMapper.INSTANCE.toDto(createdSchedule);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);

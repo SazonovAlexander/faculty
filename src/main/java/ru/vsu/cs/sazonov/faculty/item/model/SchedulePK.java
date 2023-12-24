@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class SchedulePK implements Serializable {

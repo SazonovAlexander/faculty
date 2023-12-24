@@ -35,7 +35,7 @@ create table student
     email varchar not null unique,
     address varchar not null,
     party_id int not null,
-    foreign key (party_id) references party (id)
+    foreign key (party_id) references party (id) on delete cascade
 );
 
 create table exam
@@ -46,9 +46,9 @@ create table exam
     course_id int not null,
     classroom_id int not null,
 
-    foreign key (party_id) references party (id),
-    foreign key (course_id) references course (id),
-    foreign key (classroom_id) references classroom (id)
+    foreign key (party_id) references party (id) on delete cascade,
+    foreign key (course_id) references course (id) on delete cascade,
+    foreign key (classroom_id) references classroom (id) on delete cascade
 );
 
 create table student_exam

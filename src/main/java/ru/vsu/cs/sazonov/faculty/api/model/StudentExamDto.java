@@ -9,7 +9,8 @@ import lombok.*;
 @Builder
 public class StudentExamDto {
 
-    private StudentExamPKDto pk;
+    private StudentDto student;
+    private ExamDto exam;
     private int grade;
 
 }
