@@ -26,8 +26,8 @@ public class PartyController implements PartyApi {
     private final PartyService partyService;
 
     @Override
-    public ResponseEntity<List<StudentDto>> getStudents(Integer partyId, String sortParam) {
-        List<Student> students = partyService.getStudents(partyId, Sort.by(Sort.Direction.ASC, sortParam));
+    public ResponseEntity<List<StudentDto>> getStudents(Integer partyId,int page, int size, String sortParam) {
+        List<Student> students = partyService.getStudents(partyId, PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, sortParam)));
         List<StudentDto> studentDtos = StudentMapper.INSTANCE.toDto(students);
         return ResponseEntity.ok(studentDtos);
     }

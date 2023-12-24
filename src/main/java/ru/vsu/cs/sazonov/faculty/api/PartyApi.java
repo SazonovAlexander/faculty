@@ -16,6 +16,8 @@ public interface PartyApi {
     ResponseEntity<List<StudentDto>> getStudents(
             @PathVariable("partyId")
             Integer partyId,
+            @RequestParam(required = false, defaultValue = "0") int page,
+            @RequestParam(required = false, defaultValue = "10") int size,
             @RequestParam(required = false, defaultValue = "avg") String sortParam
 
     );

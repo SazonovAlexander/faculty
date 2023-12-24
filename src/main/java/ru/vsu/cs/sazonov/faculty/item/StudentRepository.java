@@ -1,5 +1,6 @@
 package ru.vsu.cs.sazonov.faculty.item;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -10,6 +11,6 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer>, JpaSpecificationExecutor<Student> {
 
-    List<Student> findAllByParty (Party party, Sort by);
+    List<Student> findAllByParty (Party party, PageRequest pageRequest);
 
 }
