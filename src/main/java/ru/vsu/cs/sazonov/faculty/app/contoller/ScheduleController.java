@@ -32,14 +32,14 @@ public class ScheduleController implements ScheduleApi {
     @Override
     public ResponseEntity<List<ScheduleDto>> getScheduleOfClassroom(Integer classroomId) {
         List<Schedule> byClassroom = scheduleService.getByClassroom(classroomId);
-        List<ScheduleDto> dto = ScheduleMapper.INSTANCE.toDto(byClassroom);
+        List<ScheduleDto> dto = scheduleMapper.mapScheduleToDto(byClassroom);
         return ResponseEntity.ok(dto);
     }
 
     @Override
     public ResponseEntity<List<ScheduleDto>> getScheduleOfParty(Integer partyId) {
         List<Schedule> byParty = scheduleService.getByParty(partyId);
-        List<ScheduleDto> dto = ScheduleMapper.INSTANCE.toDto(byParty);
+        List<ScheduleDto> dto = scheduleMapper.mapScheduleToDto(byParty);
         return ResponseEntity.ok(dto);
     }
 
@@ -61,19 +61,19 @@ public class ScheduleController implements ScheduleApi {
     public ResponseEntity<ScheduleDto> createSchedule(ScheduleDto schedule) {
         Schedule scheduleItem = scheduleMapper.mapDtoToSchedule(schedule);
         Schedule createdSchedule = scheduleService.createSchedule(scheduleItem);
-        ScheduleDto dto = ScheduleMapper.INSTANCE.toDto(createdSchedule);
+        ScheduleDto dto = scheduleMapper.mapScheduleToDto(createdSchedule);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @Override
     public ResponseEntity<ScheduleDto> updateSchedule(Integer classroomId, Integer partyId, Integer teacherId, Integer courseId, ScheduleDto schedule) {
         Schedule currentSchedule = scheduleService.getSchedule(classroomId, partyId, teacherId, courseId);
-        Schedule newSchedule = ScheduleMapper.INSTANCE.mapToItem(schedule);
+        Schedule newSchedule = scheduleMapper.mapDtoToSchedule(schedule);
         currentSchedule.setDay(newSchedule.getDay());
         currentSchedule.setTime(newSchedule.getTime());
 
         Schedule updateSchedule = scheduleService.updateSchedule(currentSchedule);
-        return ResponseEntity.ok(ScheduleMapper.INSTANCE.toDto(updateSchedule));
+        return ResponseEntity.ok(scheduleMapper.mapScheduleToDto(updateSchedule));
     }
 
     @Override

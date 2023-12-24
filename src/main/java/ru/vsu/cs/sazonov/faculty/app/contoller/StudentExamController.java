@@ -17,26 +17,28 @@ import java.util.List;
 public class StudentExamController implements StudentExamApi {
 
     private final StudentExamService studentExamService;
+    private final ru.vsu.cs.sazonov.faculty.app.mapper.test.ExamMapper studentExamMapper;
+
 
     @Override
     public ResponseEntity<List<StudentExamDto>> getExamOfStudent(Integer studentId) {
         List<StudentExam> examOfStudent = studentExamService.getExamOfStudent(studentId);
-        List<StudentExamDto> dtos = StudentExamMapper.INSTANCE.toDto(examOfStudent);
+        List<StudentExamDto> dtos = studentExamMapper.mapStudentExamToDto(examOfStudent);
         return ResponseEntity.ok(dtos);
     }
 
     @Override
     public ResponseEntity<List<StudentExamDto>> getStudentOfExam(Integer examId) {
         List<StudentExam> examOfStudent = studentExamService.getStudentOfExam(examId);
-        List<StudentExamDto> dtos = StudentExamMapper.INSTANCE.toDto(examOfStudent);
+        List<StudentExamDto> dtos = studentExamMapper.mapStudentExamToDto(examOfStudent);
         return ResponseEntity.ok(dtos);
     }
 
     @Override
     public ResponseEntity<StudentExamDto> createStudentExam(StudentExamDto studentExam) {
-        StudentExam studentExamItem = StudentExamMapper.INSTANCE.mapToItem(studentExam);
+        StudentExam studentExamItem = studentExamMapper.mapDtoToStudentExam(studentExam);
         StudentExam createdStudentExam = studentExamService.createStudentExam(studentExamItem);
-        StudentExamDto studentExamDto = StudentExamMapper.INSTANCE.toDto(createdStudentExam);
+        StudentExamDto studentExamDto = studentExamMapper.mapStudentExamToDto(createdStudentExam);
         return ResponseEntity.status(HttpStatus.CREATED).body(studentExamDto);
     }
 
@@ -45,12 +47,12 @@ public class StudentExamController implements StudentExamApi {
 
 
         StudentExam currentStudentExam = studentExamService.getStudentExam(studentId, examId);
-        StudentExam newStudentExam = StudentExamMapper.INSTANCE.mapToItem(studentExam);
+        StudentExam newStudentExam = studentExamMapper.mapDtoToStudentExam(studentExam);
         currentStudentExam.setGrade(newStudentExam.getGrade());
 
 
         StudentExam updatedStudentExam = studentExamService.updateStudentExam(currentStudentExam);
-        return ResponseEntity.ok(StudentExamMapper.INSTANCE.toDto(updatedStudentExam));
+        return ResponseEntity.ok(studentExamMapper.mapStudentExamToDto(updatedStudentExam));
     }
 
     @Override

@@ -17,13 +17,6 @@ import java.util.stream.Collectors;
 
 public abstract class ScheduleMapper {
 
-    @Autowired
-    protected PartyService partyService;
-    @Autowired
-    protected DictionaryService dictionaryService;
-    @Autowired
-    protected TeacherService teacherService;
-
     public abstract SchedulePK mapDtoToItem(SchedulePKDto schedulePKDto);
     public abstract SchedulePKDto mapItemToDto(SchedulePK schedulePK);
 
